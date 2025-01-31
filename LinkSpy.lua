@@ -29,6 +29,26 @@ TitleText.TextScaled = true
 TitleText.TextSize = 14.000
 TitleText.TextWrapped = true
 
+local Clear = Instance.new("TextButton", Backgroud)
+Clear.TextColor3 = Color3.new(1, 1, 1)
+Clear.Text = "Clear"
+Clear.BackgroundColor3 = Color3.new(0.2, 0, 0.2)
+Clear.Size = UDim2.new(0, 20, 0, 20)
+Clear.TextScaled = true
+Clear.Position = UDim2.new(0, 350, 0, 5)
+
+local Close = Instance.new("TextButton", Backgroud)
+Close.TextColor3 = Color3.new(1, 1, 1)
+Close.Text = "Destroy"
+Close.BackgroundColor3 = Color3.new(0.4, 0, 0)
+Close.Size = UDim2.new(0, 20, 0, 20)
+Close.TextScaled = true
+Close.Position = UDim2.new(0, 375, 0, 5)
+
+Close.MouseButton1Click:Connect(function()
+  HttpSpy:Destroy()
+end)
+
 local MainContainer = cloneref(Instance.new("ScrollingFrame"))
 MainContainer.Name = "MainContainer"
 MainContainer.Parent = Backgroud
@@ -38,6 +58,14 @@ MainContainer.BorderSizePixel = 0
 MainContainer.Position = UDim2.new(0, 0, 0.12912613, 0)
 MainContainer.Size = UDim2.new(0, 406, 0, 197)
 MainContainer.ScrollBarThickness = 6
+
+Clear.MouseButton1Click:Connect(function()
+  for _, button in ipairs(MainContainer:GetDescendants()) do
+    if button:IsA("TextButton") then
+button:Destroy()
+    end
+  end
+end)
 
 local UIListLayout = cloneref(Instance.new("UIListLayout"))
 UIListLayout.Parent = MainContainer
@@ -72,6 +100,7 @@ MainContainer.CanvasSize = UDim2.new(0, 0, 0, absoluteContentSize.Y)
 end)
 
 local function Log(text,headers)
+ if not HttpSpy or HttpSpy == nil then return end
   local Label = Template:Clone()
     if headers and type(headers) == "table" then 
       text = text .. " (HEADERS:"
