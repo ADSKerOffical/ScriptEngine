@@ -36,3 +36,36 @@ Example:
 local tabl = {"Tot"}
 setreadonly(tabl, true)
 print(isreadonly(tabl)) -- true
+
+7) glooperror – same as error but the line where the error occurred is not displayed
+Example:
+
+glooperror("This is a error")
+
+8) gethui – same as game.CoreGui but it is necessary in order to GUI it was harder to find anti cheat
+Example:
+
+local ScreenGui = Instance.new("ScreenGui", gethui())
+
+9) newcclosure – makes it harder for anti-cheat to find the variable
+Example:
+
+local ytt = newcclosure(Instance.new("Topl", game.Players.LocalPlayer.Backpack))
+
+10) iscclosure – checks if a function is CClosure
+Example:
+
+local ytt = newcclosure(Instance.new("Topl", game.Players.LocalPlayer.Backpack))
+print(iscclosure(ytt)) -- true
+
+11) hookmetamethod – creates a hook that intercepts a function or userdata, but unlike hookfunction hookmetamethod does not display information
+Example:
+
+protect = hookmetamethod(game, "__namecall", function(self,...)
+  if self == game.Players.LocalPlayer and getnamecallmethod() == "Kick" or getnamecallmethod() == "Destroy" then
+    return 
+  end
+ return protect(self, ...)
+end)
+
+12) cloneref – same as newcclosure
