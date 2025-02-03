@@ -1,0 +1,38 @@
+1) hookfunction – function that hook a function and returns the information that was hooked
+Example:
+
+hookfunction(game.HttpGet, function(content)
+  print(content)
+end)
+
+2) ishooked – return bool is variable a hookfunction or hookmetamethod
+Example: 
+
+local de = hookfunction(game.HttpGet, function(content)
+  print(content)
+end)
+ print(ishook(de)) -- true
+
+3) isfunctionhooked – returns a bool whether the function is subject to hook
+Example:
+
+hookfunction(game.HttpGet, function(content)
+  print(content)
+end)
+ print(isfunctionhooked(game.HttpGet)) -- true
+
+4) clonefunction – copies the function
+
+5) setreadonly – a function that makes it so that the table cannot be changed but can copy
+Example:
+
+local tabl = {"Tot"}
+setreadonly(tabl, true)
+tabl = {"Tyt"} -- error
+
+6) isreadonly – function that checks if a table can be modified
+Example:
+
+local tabl = {"Tot"}
+setreadonly(tabl, true)
+print(isreadonly(tabl)) -- true
