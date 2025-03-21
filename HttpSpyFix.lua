@@ -244,19 +244,12 @@ end
 
 registerDynamicScrollingFrame(MainContainer)
 
-local HttpGet
-HttpGet = hookfunction(game.HttpGet, function(self, url, ...)
-Log("Http Get Request from: "..url)
-
-return HttpGet(self, url, ...)
-end)
-
-local HttpGetAsync 
-HttpGetAsync = hookfunction(game.HttpGetAsync, function(self, url, ...)
-Log("Http Get Async Request from: "..url)
-
-return HttpGetAsync(self, url, ...)
-end)
+   local hook1; hook1 = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+    if self == game and string.find(getnamecallmethod(), "Http") then
+   Log(getnamecallmethod() .. " received url: " .. (...))
+      end
+      return hook1(self, ...)
+    end))
 
 local RequestLog
 RequestLog = hookfunction(request, function(dat)
